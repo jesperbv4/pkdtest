@@ -1,14 +1,13 @@
 import React, {useState} from "react";
-import Main from "./SortingVisualizer/Main"
-import AlgoContext from "./SortingVisualizer/SortingVisualizer";
+import Test from "./components/SortingVisualizer"
 import './App.css'
-import './SortingVisualizer/SortViz.css'
+import './components/SortViz.css'
 
 function App(){
 
   return (
     <div>
-      <Main />
+      <Test />
     </div>
   )
 

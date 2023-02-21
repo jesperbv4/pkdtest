@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import './App.css';
-import reportWebVitals from './reportWebVitals';
-import AlgoContext from './SortingVisualizer/SortingVisualizer';
+
 
 
 
@@ -14,10 +13,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-      <AlgoContext>
-        <App />
-      </AlgoContext>
-      
+        <App />  
     </React.StrictMode>
   );
 

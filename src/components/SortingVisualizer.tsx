@@ -1,42 +1,49 @@
-import React, {useState, createContext, useEffect} from "react";
+import React, {useState, createContext, useEffect, ReactNode} from "react";
+
+type State = number[][];
 
 
-
-interface Props {
-    children: React.ReactNode;
-};
-
-type Items = {
-    items: number[]
-    setItems?: React.Dispatch<React.SetStateAction<number[]>>
-};
-
-export const ItemsContext = createContext<Items>( { items:[] } )
-
-
-
-const AlgoContext: React.FC<Props> = ({children}) => {
+const state:State  = [];
+const Test: React.FC = () => {
     const [items, setItems] = useState<number[]>([]);
-
+    
     useEffect(()=>{
+        const newItems = random_permutation(20);
+        setItems(newItems);
+    }, []);
+
+    function handleClick() {
+        const sortedItems = insertionSort([...items]);
+        setItems(sortedItems)
+    }
+
+    function scramble() {
         const newItems = random_permutation(10);
         setItems(newItems);
-        
-    }, []);
-    
-    return <ItemsContext.Provider value={{items, setItems}}>
-        {children}
-    </ItemsContext.Provider>
+    }
+    return (
+        <div className="array-bar">
+            <button onClick={scramble}>Scramble</button>
+            {items.map((value, idx) => (
+                <div className="array-container" key={idx}>
+                    {value}
+                </div>
+            ))}
+            <button onClick={handleClick}>Sort</button>
+        </div>
+    )
 };
 
-export default AlgoContext
+export default Test
+
+
 
 /**
  * Takes a number and makes a permutation 
  * @param length number: the length for the Array
  * @returns Array: an Array with a permutation of the numbers from 0-(number-1)
  */
-function random_permutation(length: number): Array<number> {
+export function random_permutation(length: number): Array<number> {
 
     function getRandomInt(min: number, max: number): number {
         min = Math.ceil(min);
@@ -61,8 +68,8 @@ function random_permutation(length: number): Array<number> {
     return result;
 }
 
-function insertionSort<T>(list: T[]): T[] {
-
+export function insertionSort<T>(list: T[]): T[] {
+    
     IndexIterator:
     for (let i = 1; i < list.length; i++) {
 
@@ -83,4 +90,3 @@ function insertionSort<T>(list: T[]): T[] {
 
     return list;
 }
-
