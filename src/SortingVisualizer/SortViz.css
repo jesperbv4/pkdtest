@@ -1,10 +1,10 @@
-.array-container {
+.array-bar {
     display: flex;
     justify-content: center;
     align-self: center;
 }
 
-.array-bar {
+.array-container {
     width: 30px;
     height: 30px;
     border-color: black;

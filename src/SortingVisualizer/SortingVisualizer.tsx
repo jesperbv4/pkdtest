@@ -1,38 +1,35 @@
-import React from "react";
+import React, {useState, createContext, useEffect} from "react";
 
 
-class SortingVisualizer extends React.Component {
-    constructor(props:any) {
-        super(props);
+
+interface Props {
+    children: React.ReactNode;
+};
+
+type Items = {
+    items: number[]
+    setItems?: React.Dispatch<React.SetStateAction<number[]>>
+};
+
+export const ItemsContext = createContext<Items>( { items:[] } )
+
+
+
+const AlgoContext: React.FC<Props> = ({children}) => {
+    const [items, setItems] = useState<number[]>([]);
+
+    useEffect(()=>{
+        const newItems = random_permutation(10);
+        setItems(newItems);
+        
+    }, []);
     
-        this.state= {
-            array: [],
-        };
-    }
+    return <ItemsContext.Provider value={{items, setItems}}>
+        {children}
+    </ItemsContext.Provider>
+};
 
-    componenetDidMount() {
-        this.resetArray();
-    }
-
-    resetArray() {
-        const array = random_permutation(10);
-        this.setState({array}); 
-    }
-    render() {
-        while(true){
-        const array = random_permutation(10);
-
-        return (
-            <div className="array-container">
-                {array.map((value, idx) => (
-                    <div className="array-bar" key={idx}>
-                        {value}
-                    </div>
-                ))}
-            </div>
-        )}
-    }
-}
+export default AlgoContext
 
 /**
  * Takes a number and makes a permutation 
@@ -60,7 +57,30 @@ function random_permutation(length: number): Array<number> {
         const j = getRandomInt(i,length)
         swap(result, i, j);
     }
+    
     return result;
 }
 
-export default SortingVisualizer
+function insertionSort<T>(list: T[]): T[] {
+
+    IndexIterator:
+    for (let i = 1; i < list.length; i++) {
+
+        const valueToSort = list[i];
+
+        InsertionIterator:
+        for (let j = i - 1; j >= 0; j--) {
+            if (valueToSort >= list[j]) {
+                list[j + 1] = valueToSort;
+                continue IndexIterator;
+            } else {
+                list[j + 1] = list[j];
+                list[j] = valueToSort;
+                continue InsertionIterator;
+            }
+        }
+    }
+
+    return list;
+}
+
