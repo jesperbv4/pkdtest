@@ -1,0 +1,14 @@
+.array-container {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.array-bar {
+    width: 30px;
+    height: 30px;
+    border-color: black;
+    border-style: double;
+    margin: 2px;
+    text-align: center;
+}

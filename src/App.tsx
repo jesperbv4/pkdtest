@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import SortingVisualizer from "./SortingVisualizer/SortingVisualizer";
+import './App.css'
+import './SortingVisualizer/SortViz.css'
+
+type state = number | null;
+
+interface IList {
+  elements: {
+    value:number,
+    state:state 
+  }[]
+}
+
+
+const current = 0;
+const reference = 1;
 
 function App() {
+
+  const [element, setElement] = useState<IList["elements"]>([
+    {
+      value: 1,
+      state: null
+    },
+    {
+      value: 2,
+      state: null
+    }
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Algorithm sorting Wizard</h1>
+        <SortingVisualizer></SortingVisualizer>
     </div>
-  );
+  )
+
 }
 
 export default App;
