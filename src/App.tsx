@@ -6,9 +6,9 @@ import './components/SortViz.css'
 function App(){
 
   return (
-    <div>
-      <Test />
-    </div>
+      <div className="main-box">
+        <Test />
+      </div>
   )
 
 }

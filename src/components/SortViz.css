@@ -1,4 +1,5 @@
 .array-bar {
+    margin : 50px;
     display: flex;
     justify-content: center;
     align-self: center;
@@ -11,4 +12,11 @@
     border-style: double;
     margin: 2px;
     text-align: center;
+}
+
+#current {
+    background-color:green;
+}
+#ref {
+    background-color: red ;
 }
